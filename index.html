@@ -9,15 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F7F3EE;
+    --cream: #F2EDE4;
     --ink: #1C1A17;
     --ink-soft: #3D3A35;
-    --ink-muted: #7A766E;
+    --ink-muted: #6B6760;
     --accent: #B5612A;
+    --accent-dark: #8C4519;
     --accent-light: #E8C9B0;
-    --accent-pale: #F5ECE4;
-    --line: #DDD8D0;
-    --white: #FDFAF7;
+    --accent-pale: #EDD9C8;
+    --section-alt: #2A2520;
+    --section-mid: #E6DDD2;
+    --line: #C8C0B4;
+    --white: #FAF6F1;
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Syne', sans-serif;
   }
@@ -35,9 +38,9 @@
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(247,243,238,0.94);
+    background: rgba(28,26,23,0.96);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid rgba(181,97,42,0.3);
     padding: 0 2rem;
     height: 60px;
     display: flex; align-items: center; justify-content: space-between;
@@ -46,7 +49,7 @@
     font-family: var(--font-display);
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--ink);
+    color: var(--cream);
     text-decoration: none;
     letter-spacing: 0.02em;
   }
@@ -58,25 +61,25 @@
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ink-muted);
+    color: rgba(242,237,228,0.6);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover { color: var(--accent-light); }
   .lang-toggle {
-    background: none; border: 1px solid var(--line);
+    background: none; border: 1px solid rgba(181,97,42,0.5);
     border-radius: 3px;
     padding: 4px 10px;
     font-family: var(--font-body);
     font-size: 0.7rem;
     letter-spacing: 0.1em;
-    color: var(--ink-muted);
+    color: var(--accent-light);
     cursor: pointer;
     transition: all 0.2s;
   }
-  .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .lang-toggle:hover { border-color: var(--accent-light); color: #fff; }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-  .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+  .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--cream); transition: all 0.3s; }
 
   /* HERO */
   .hero {
@@ -85,6 +88,19 @@
     padding: 100px 4rem 4rem;
     position: relative;
     overflow: hidden;
+    background: var(--ink);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 59px,
+      rgba(181,97,42,0.07) 59px,
+      rgba(181,97,42,0.07) 60px
+    );
+    pointer-events: none;
   }
   .hero-bg-char {
     position: absolute;
@@ -95,7 +111,7 @@
     font-size: clamp(14rem, 28vw, 26rem);
     font-weight: 300;
     color: transparent;
-    -webkit-text-stroke: 1px var(--line);
+    -webkit-text-stroke: 1px rgba(181,97,42,0.2);
     pointer-events: none;
     user-select: none;
     line-height: 1;
@@ -104,7 +120,7 @@
     font-size: 0.68rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--accent-light);
     margin-bottom: 1.5rem;
   }
   .hero-name {
@@ -112,14 +128,14 @@
     font-size: clamp(3rem, 7vw, 6.5rem);
     font-weight: 300;
     line-height: 1.05;
-    color: var(--ink);
+    color: var(--cream);
     margin-bottom: 1.5rem;
   }
-  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-name em { font-style: italic; color: var(--accent-light); }
   .hero-subtitle {
     font-size: 0.85rem;
     letter-spacing: 0.08em;
-    color: var(--ink-muted);
+    color: rgba(242,237,228,0.55);
     margin-bottom: 3rem;
   }
   .lang-badges {
@@ -128,23 +144,24 @@
     flex-wrap: wrap;
   }
   .lang-badge {
-    border: 1px solid var(--line);
+    border: 1px solid rgba(181,97,42,0.35);
     padding: 6px 14px;
     font-size: 0.75rem;
     letter-spacing: 0.1em;
-    color: var(--ink-soft);
-    background: var(--white);
+    color: rgba(242,237,228,0.7);
+    background: rgba(255,255,255,0.04);
     border-radius: 2px;
     transition: all 0.2s;
   }
-  .lang-badge.native { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-  .lang-badge.c2 { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .lang-badge span { opacity: 0.7; font-size: 0.65rem; margin-left: 4px; }
+  .lang-badge.native { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .lang-badge.c2 { background: rgba(181,97,42,0.25); color: var(--accent-light); border-color: rgba(181,97,42,0.5); }
+  .lang-badge.b2 { background: rgba(181,97,42,0.12); color: var(--accent-light); border-color: rgba(181,97,42,0.3); }
+  .lang-badge span { opacity: 0.75; font-size: 0.65rem; margin-left: 4px; }
   .lang-arrow { color: var(--accent); font-family: var(--font-display); font-size: 1.2rem; }
   .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn-primary {
-    background: var(--ink);
-    color: var(--cream);
+    background: var(--accent);
+    color: #fff;
     padding: 13px 32px;
     font-family: var(--font-body);
     font-size: 0.75rem;
@@ -155,10 +172,10 @@
     border: none; cursor: pointer;
     transition: background 0.2s;
   }
-  .btn-primary:hover { background: var(--accent); }
+  .btn-primary:hover { background: var(--accent-dark); }
   .btn-secondary {
     background: transparent;
-    color: var(--ink);
+    color: var(--cream);
     padding: 12px 32px;
     font-family: var(--font-body);
     font-size: 0.75rem;
@@ -166,16 +183,16 @@
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 2px;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(242,237,228,0.25);
     cursor: pointer;
     transition: all 0.2s;
   }
-  .btn-secondary:hover { border-color: var(--ink); }
+  .btn-secondary:hover { border-color: var(--accent-light); color: var(--accent-light); }
   .scroll-hint {
     position: absolute; bottom: 2.5rem; left: 4rem;
     display: flex; align-items: center; gap: 0.75rem;
     font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink-muted);
+    color: rgba(242,237,228,0.35);
   }
   .scroll-line { width: 40px; height: 1px; background: var(--accent); }
 
@@ -200,8 +217,50 @@
   }
   .section-title em { font-style: italic; color: var(--accent); }
 
+  /* CARTA */
+  #carta { background: var(--section-alt); color: var(--cream); }
+  #carta .section-label { color: var(--accent-light); }
+  #carta .section-label::after { background: var(--accent-light); }
+  #carta .section-title { color: var(--cream); }
+  .carta-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+  .carta-meta { padding-top: 0.5rem; }
+  .carta-meta-item { margin-bottom: 1.5rem; }
+  .carta-meta-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,201,176,0.6); margin-bottom: 0.3rem; }
+  .carta-meta-value { font-family: var(--font-display); font-size: 1rem; color: var(--cream); }
+  .carta-body {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(181,97,42,0.2);
+    border-left: 3px solid var(--accent);
+    padding: 3rem;
+  }
+  .carta-salutacio {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--accent-light);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  .carta-text {
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: rgba(242,237,228,0.8);
+    margin-bottom: 1.5rem;
+  }
+  .carta-comiat {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(181,97,42,0.2);
+  }
+  .carta-comiat p { font-size: 0.82rem; color: rgba(242,237,228,0.6); margin-bottom: 0.5rem; font-style: italic; }
+  .carta-firma {
+    font-family: var(--font-display);
+    font-size: 1.5rem; font-weight: 300;
+    color: var(--cream);
+    margin-top: 0.5rem;
+  }
+
   /* PERFIL */
-  #perfil { background: var(--white); }
+  #perfil { background: var(--cream); }
   .perfil-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -227,49 +286,49 @@
   .perfil-list li::before { content: '·'; color: var(--accent); font-size: 1.2rem; flex-shrink: 0; line-height: 1.4; }
 
   /* SERVEIS */
-  #serveis { background: var(--cream); }
+  #serveis { background: var(--section-alt); color: var(--cream); }
+  #serveis .section-label { color: var(--accent-light); }
+  #serveis .section-label::after { background: var(--accent-light); }
+  #serveis .section-title { color: var(--cream); }
   .serveis-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5px;
-    background: var(--line);
-    border: 1.5px solid var(--line);
+    gap: 1px;
+    background: rgba(181,97,42,0.2);
+    border: 1px solid rgba(181,97,42,0.2);
     margin-bottom: 2rem;
   }
   .servei-card {
-    background: var(--white);
+    background: rgba(255,255,255,0.04);
     padding: 1.75rem;
     transition: background 0.2s;
   }
-  .servei-card:hover { background: var(--accent-pale); }
+  .servei-card:hover { background: rgba(181,97,42,0.15); }
   .servei-nom {
     font-family: var(--font-display);
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
-    color: var(--ink);
+    color: var(--cream);
   }
   .servei-combo {
     font-size: 0.7rem; letter-spacing: 0.12em;
-    color: var(--accent); margin-bottom: 1.25rem;
+    color: var(--accent-light); margin-bottom: 1.25rem;
     text-transform: uppercase;
   }
-  .servei-preus {
-    display: flex; gap: 1.5rem;
-  }
-  .preu-item { }
-  .preu-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 2px; }
-  .preu-value { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: var(--ink); }
-  .preu-value.accent { color: var(--accent); }
+  .servei-preus { display: flex; gap: 1.5rem; }
+  .preu-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,237,228,0.45); margin-bottom: 2px; }
+  .preu-value { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; color: rgba(242,237,228,0.75); }
+  .preu-value.accent { color: var(--accent-light); }
   .serveis-nota {
-    font-size: 0.78rem; color: var(--ink-muted);
+    font-size: 0.78rem; color: rgba(242,237,228,0.55);
     border-left: 2px solid var(--accent);
     padding-left: 1rem;
     font-style: italic;
   }
 
   /* EXPERIÈNCIA */
-  #experiencia { background: var(--white); }
+  #experiencia { background: var(--section-mid); }
   .timeline { position: relative; padding-left: 2rem; }
   .timeline::before {
     content: ''; position: absolute;
@@ -286,8 +345,8 @@
     top: 8px;
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--cream);
-    border: 1.5px solid var(--accent);
+    background: var(--section-mid);
+    border: 2px solid var(--accent);
     transform: translateX(-3px);
   }
   .timeline-date {
@@ -310,8 +369,10 @@
   .timeline-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
   .tag {
     font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-    border: 1px solid var(--line); padding: 3px 10px; border-radius: 2px;
-    color: var(--ink-muted);
+    background: rgba(181,97,42,0.12);
+    border: 1px solid rgba(181,97,42,0.3);
+    padding: 3px 10px; border-radius: 2px;
+    color: var(--accent-dark);
   }
 
   /* MOSTRES */
@@ -339,63 +400,70 @@
     font-size: 1.2rem; font-weight: 500; color: var(--ink);
   }
   .mostra-arrow {
-    font-size: 1.2rem; color: var(--accent);
+    font-size: 1.5rem; color: var(--accent);
     transition: transform 0.3s;
     flex-shrink: 0;
+    line-height: 1;
   }
   .mostra-item.open .mostra-arrow { transform: rotate(90deg); }
   .mostra-body {
     max-height: 0; overflow: hidden;
-    transition: max-height 0.4s ease;
+    transition: max-height 0.5s ease;
   }
-  .mostra-item.open .mostra-body { max-height: 600px; }
+  .mostra-item.open .mostra-body { max-height: 900px; }
   .mostra-content {
-    padding: 0 2rem 2rem;
+    padding: 1.5rem 2rem 2rem;
     border-top: 1px solid var(--line);
-    padding-top: 1.5rem;
   }
-  .mostra-content p { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.8; margin-bottom: 1rem; }
+  .mostra-content p { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.85; margin-bottom: 1rem; }
   .mostra-content p:last-child { margin-bottom: 0; }
   .mostra-competencies {
     display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.25rem;
   }
   .comp-tag {
     font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-    background: var(--accent-pale); color: var(--accent);
-    border: 1px solid var(--accent-light);
+    background: rgba(181,97,42,0.1); color: var(--accent-dark);
+    border: 1px solid rgba(181,97,42,0.25);
     padding: 4px 12px; border-radius: 2px;
   }
 
   /* FORMACIÓ */
-  #formacio { background: var(--white); }
+  #formacio { background: var(--section-alt); color: var(--cream); }
+  #formacio .section-label { color: var(--accent-light); }
+  #formacio .section-label::after { background: var(--accent-light); }
+  #formacio .section-title { color: var(--cream); }
   .formacio-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4rem; }
   .formacio-bloc-title {
     font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
+    color: var(--accent-light); margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem; border-bottom: 1px solid rgba(181,97,42,0.25);
   }
   .formacio-entry { margin-bottom: 1.75rem; }
-  .formacio-year { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 0.2rem; }
-  .formacio-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--ink); line-height: 1.3; margin-bottom: 0.2rem; }
-  .formacio-inst { font-size: 0.75rem; color: var(--ink-muted); }
+  .formacio-year { font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(242,237,228,0.45); margin-bottom: 0.2rem; }
+  .formacio-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--cream); line-height: 1.3; margin-bottom: 0.2rem; }
+  .formacio-inst { font-size: 0.75rem; color: rgba(242,237,228,0.5); }
   .eines { display: flex; flex-direction: column; gap: 0.75rem; }
   .eina {
     display: flex; align-items: center; gap: 0.75rem;
     padding: 0.75rem 1rem;
-    border: 1px solid var(--line); border-radius: 3px;
-    background: var(--cream);
-    font-size: 0.8rem; color: var(--ink-soft);
+    border: 1px solid rgba(181,97,42,0.2);
+    border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+    font-size: 0.8rem; color: rgba(242,237,228,0.75);
     font-family: var(--font-body);
     letter-spacing: 0.04em;
+    transition: border-color 0.2s;
   }
+  .eina:hover { border-color: rgba(181,97,42,0.5); }
   .eina::before { content: '◈'; color: var(--accent); font-size: 0.7rem; }
 
   /* FACTURA */
-  #factura { background: var(--accent-pale); }
+  #factura { background: var(--section-mid); }
   .factura-wrap { max-width: 700px; }
   .factura-doc {
     background: var(--white);
     border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
     padding: 3rem;
     margin-bottom: 2rem;
   }
@@ -422,7 +490,6 @@
   .factura-table td { padding: 0.75rem 0; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; }
   .factura-table td:not(:first-child) { text-align: right; }
   .factura-totals { display: grid; grid-template-columns: 1fr 1fr; }
-  .factura-totals-right { }
   .factura-total-row {
     display: flex; justify-content: space-between;
     padding: 0.4rem 0; font-size: 0.82rem; color: var(--ink-soft);
@@ -457,7 +524,7 @@
     font-size: 0.75rem; letter-spacing: 0.08em;
     transition: all 0.2s;
   }
-  .social-link:hover { border-color: var(--accent-light); color: var(--accent-light); }
+  .social-link:hover { border-color: var(--accent-light); color: var(--accent-light); background: rgba(181,97,42,0.15); }
   .form-group { margin-bottom: 1.5rem; }
   .form-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(247,243,238,0.6); display: block; margin-bottom: 0.5rem; }
   .form-input, .form-textarea {
@@ -478,15 +545,15 @@
     letter-spacing: 0.12em; text-transform: uppercase;
     cursor: pointer; transition: background 0.2s; width: 100%;
   }
-  .btn-send:hover { background: #9e4e1e; }
+  .btn-send:hover { background: var(--accent-dark); }
 
   /* FOOTER */
   footer {
-    background: #111;
+    background: #0D0C0A;
     padding: 2rem 4rem;
     display: flex; align-items: center; justify-content: space-between;
     font-size: 0.7rem; letter-spacing: 0.08em;
-    color: rgba(247,243,238,0.35);
+    color: rgba(242,237,228,0.3);
   }
 
   /* ANIMATE */
@@ -500,23 +567,29 @@
   @media (max-width: 768px) {
     nav { padding: 0 1.5rem; }
     .nav-links { display: none; }
-    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: var(--cream); padding: 1.5rem; gap: 1rem; border-bottom: 1px solid var(--line); z-index: 99; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(28,26,23,0.98);
+      padding: 1.5rem; gap: 1rem;
+      border-bottom: 1px solid rgba(181,97,42,0.3); z-index: 99;
+    }
     .hamburger { display: flex; }
     .hero { padding: 90px 1.5rem 3rem; }
     .hero-bg-char { display: none; }
     section { padding: 4rem 1.5rem; }
-    .perfil-grid, .contacte-grid, .formacio-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .perfil-grid, .contacte-grid, .formacio-grid, .carta-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .factura-header { flex-direction: column; gap: 1rem; }
     .factura-parties { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
     .scroll-hint { display: none; }
+    .carta-body { padding: 1.5rem; }
   }
 
   /* PRINT */
   @media print {
-    nav, #hero, #perfil, #serveis, #experiencia, #mostres, #formacio, #contacte, footer { display: none; }
+    nav, #hero, #carta, #perfil, #serveis, #experiencia, #mostres, #formacio, #contacte, footer { display: none; }
     #factura { display: block !important; background: white; padding: 0; }
-    .section-label, .section-title, .factura-wrap { max-width: none; }
   }
 </style>
 </head>
@@ -526,6 +599,7 @@
 <nav role="navigation" aria-label="Navegació principal">
   <a href="#" class="nav-logo" id="nav-logo">Maria del Mar Vega</a>
   <ul class="nav-links" id="nav-menu">
+    <li><a href="#carta" data-ca="Carta" data-es="Carta">Carta</a></li>
     <li><a href="#perfil" data-ca="Perfil" data-es="Perfil">Perfil</a></li>
     <li><a href="#serveis" data-ca="Serveis" data-es="Servicios">Serveis</a></li>
     <li><a href="#experiencia" data-ca="Experiència" data-es="Experiencia">Experiència</a></li>
@@ -550,7 +624,7 @@
     <span class="lang-badge native">ES <span data-ca="natiu" data-es="nativo">natiu</span></span>
     <span class="lang-arrow" aria-hidden="true">↔</span>
     <span class="lang-badge c2">EN <span>C2</span></span>
-    <span class="lang-badge" style="border-color:var(--accent);color:var(--accent);">JA <span>B1</span></span>
+    <span class="lang-badge b2">JA <span>B2</span></span>
   </div>
   <div class="hero-ctas fade-up" style="transition-delay:0.4s">
     <a href="#contacte" class="btn-primary" data-ca="Contacta'm" data-es="Contáctame">Contacta'm</a>
@@ -562,18 +636,53 @@
   </div>
 </section>
 
+<!-- CARTA DE PRESENTACIÓ -->
+<section id="carta" aria-labelledby="carta-title">
+  <div class="section-label" aria-hidden="true" data-ca="Documentació" data-es="Documentación">Documentació</div>
+  <div class="carta-grid">
+    <div class="carta-meta fade-up">
+      <h2 class="section-title" id="carta-title"><em data-ca="Carta de" data-es="Carta de">Carta de</em><br><span data-ca="presentació" data-es="presentación">presentació</span></h2>
+      <div class="carta-meta-item">
+        <p class="carta-meta-label" data-ca="Remitent" data-es="Remitente">Remitent</p>
+        <p class="carta-meta-value">Maria del Mar Vega Díaz</p>
+      </div>
+      <div class="carta-meta-item">
+        <p class="carta-meta-label" data-ca="Especialitat" data-es="Especialidad">Especialitat</p>
+        <p class="carta-meta-value" data-ca="Traducció i Interpretació" data-es="Traducción e Interpretación">Traducció i Interpretació</p>
+      </div>
+      <div class="carta-meta-item">
+        <p class="carta-meta-label" data-ca="Llengües" data-es="Lenguas">Llengües</p>
+        <p class="carta-meta-value">CA · ES · EN · JA</p>
+      </div>
+    </div>
+    <div class="carta-body fade-up">
+      <p class="carta-salutacio" data-ca="Benvolgut/Benvolguda responsable de selecció," data-es="Estimado/Estimada responsable de selección,">Benvolgut/Benvolguda responsable de selecció,</p>
+      <p class="carta-text" data-ca="Em poso en contacte amb vosaltres per expressar el meu interès a formar part dels projectes que desenvolupa la vostra empresa i posar a disposició els coneixements, les habilitats i l'experiència adquirits durant la meva formació en Traducció i Interpretació." data-es="Me pongo en contacto con vosotros para expresar mi interés en formar parte de los proyectos que desarrolla vuestra empresa y poner a disposición los conocimientos, las habilidades y la experiencia adquiridos durante mi formación en Traducción e Interpretación.">Em poso en contacte amb vosaltres per expressar el meu interès a formar part dels projectes que desenvolupa la vostra empresa i posar a disposició els coneixements, les habilitats i l'experiència adquirits durant la meva formació en Traducció i Interpretació.</p>
+      <p class="carta-text" data-ca="Al llarg dels meus estudis he desenvolupat una sòlida capacitat d'aprenentatge, adaptació i organització, així com competències de comunicació oral i escrita que considero essencials per oferir un servei lingüístic de qualitat. La participació en projectes acadèmics i pràctiques professionals m'ha permès treballar de manera eficient en equip, gestionar terminis exigents i afrontar nous reptes amb iniciativa, responsabilitat i flexibilitat." data-es="A lo largo de mis estudios he desarrollado una sólida capacidad de aprendizaje, adaptación y organización, así como competencias de comunicación oral y escrita que considero esenciales para ofrecer un servicio lingüístico de calidad. La participación en proyectos académicos y prácticas profesionales me ha permitido trabajar de manera eficiente en equipo, gestionar plazos exigentes y afrontar nuevos retos con iniciativa, responsabilidad y flexibilidad.">Al llarg dels meus estudis he desenvolupat una sòlida capacitat d'aprenentatge, adaptació i organització, així com competències de comunicació oral i escrita que considero essencials per oferir un servei lingüístic de qualitat. La participació en projectes acadèmics i pràctiques professionals m'ha permès treballar de manera eficient en equip, gestionar terminis exigents i afrontar nous reptes amb iniciativa, responsabilitat i flexibilitat.</p>
+      <p class="carta-text" data-ca="La meva trajectòria professional ha contribuït a reforçar aquestes competències. He realitzat pràctiques com a intèrpret, experiència que m'ha permès desenvolupar habilitats de mediació lingüística i intercultural. També he treballat com a informadora de sala en un museu, professora particular, Au Pair a Eslovènia i Group Leader a Anglaterra, funcions que han potenciat la meva capacitat de comunicació, resolució de problemes i adaptació a entorns multiculturals." data-es="Mi trayectoria profesional ha contribuido a reforzar estas competencias. He realizado prácticas como intérprete, experiencia que me ha permitido desarrollar habilidades de mediación lingüística e intercultural. También he trabajado como informadora de sala en un museo, profesora particular, Au Pair en Eslovenia y Group Leader en Inglaterra, funciones que han potenciado mi capacidad de comunicación, resolución de problemas y adaptación a entornos multiculturales.">La meva trajectòria professional ha contribuït a reforçar aquestes competències. He realitzat pràctiques com a intèrpret, experiència que m'ha permès desenvolupar habilitats de mediació lingüística i intercultural. També he treballat com a informadora de sala en un museu, professora particular, Au Pair a Eslovènia i Group Leader a Anglaterra, funcions que han potenciat la meva capacitat de comunicació, resolució de problemes i adaptació a entorns multiculturals.</p>
+      <p class="carta-text" data-ca="A més, la participació en programes internacionals, incloent-hi una experiència Erasmus+ a Irlanda, m'ha proporcionat una visió oberta i global, així com una gran facilitat per relacionar-me amb persones de diferents contextos culturals. Les meves llengües de treball són el català, el castellà, l'anglès i el japonès, fet que em permet desenvolupar-me en entorns multilingües i contribuir a una comunicació eficaç entre interlocutors de diferents procedències." data-es="Además, la participación en programas internacionales, incluyendo una experiencia Erasmus+ en Irlanda, me ha proporcionado una visión abierta y global, así como una gran facilidad para relacionarme con personas de diferentes contextos culturales. Mis lenguas de trabajo son el catalán, el castellano, el inglés y el japonés, lo que me permite desenvolverme en entornos multilingües y contribuir a una comunicación eficaz entre interlocutores de diferentes procedencias.">A més, la participació en programes internacionals, incloent-hi una experiència Erasmus+ a Irlanda, m'ha proporcionat una visió oberta i global, així com una gran facilitat per relacionar-me amb persones de diferents contextos culturals. Les meves llengües de treball són el català, el castellà, l'anglès i el japonès, fet que em permet desenvolupar-me en entorns multilingües i contribuir a una comunicació eficaç entre interlocutors de diferents procedències.</p>
+      <p class="carta-text" data-ca="Soc una persona compromesa, responsable i exigent amb la qualitat dels resultats que ofereixo, una actitud que s'ha reflectit tant en el meu recorregut acadèmic com professional. També disposo de cartes de recomanació que acrediten la meva implicació i el meu rendiment en experiències laborals anteriors." data-es="Soy una persona comprometida, responsable y exigente con la calidad de los resultados que ofrezco, una actitud que se ha reflejado tanto en mi recorrido académico como profesional. También dispongo de cartas de recomendación que acreditan mi implicación y mi rendimiento en experiencias laborales anteriores.">Soc una persona compromesa, responsable i exigent amb la qualitat dels resultats que ofereixo, una actitud que s'ha reflectit tant en el meu recorregut acadèmic com professional. També disposo de cartes de recomanació que acrediten la meva implicació i el meu rendiment en experiències laborals anteriors.</p>
+      <p class="carta-text" data-ca="M'agradaria tenir l'oportunitat d'ampliar personalment la informació sobre la meva formació i experiència, així com explicar de quina manera les meves competències poden contribuir als objectius de la vostra organització. Resto a la vostra disposició per concertar una entrevista quan ho considereu convenient." data-es="Me gustaría tener la oportunidad de ampliar personalmente la información sobre mi formación y experiencia, así como explicar de qué manera mis competencias pueden contribuir a los objetivos de vuestra organización. Quedo a vuestra disposición para concertar una entrevista cuando lo consideréis conveniente.">M'agradaria tenir l'oportunitat d'ampliar personalment la informació sobre la meva formació i experiència, així com explicar de quina manera les meves competències poden contribuir als objectius de la vostra organització. Resto a la vostra disposició per concertar una entrevista quan ho considereu convenient.</p>
+      <div class="carta-comiat">
+        <p data-ca="Atentament," data-es="Atentamente,">Atentament,</p>
+        <p class="carta-firma">Maria del Mar Vega Díaz</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PERFIL -->
 <section id="perfil" aria-labelledby="perfil-title">
   <div class="section-label" aria-hidden="true" data-ca="Sobre mi" data-es="Sobre mí">Sobre mi</div>
   <div class="perfil-grid">
     <div>
       <h2 class="section-title" id="perfil-title"><em data-ca="Perfil" data-es="Perfil">Perfil</em><br><span data-ca="professional" data-es="profesional">professional</span></h2>
-      <p class="perfil-text fade-up" data-ca="Traductora i intèrpret en formació, especialitzada en la combinació lingüística català/castellà ↔ anglès, amb coneixements de japonès. Una trajectòria marcada per l'experiència internacional, el rigor acadèmic i la passió per la comunicació intercultural." data-es="Traductora e intérprete en formación, especializada en la combinación lingüística catalán/castellano ↔ inglés, con conocimientos de japonés. Una trayectoria marcada por la experiencia internacional, el rigor académico y la pasión por la comunicación intercultural.">Traductora i intèrpret en formació, especialitzada en la combinació lingüística català/castellà ↔ anglès, amb coneixements de japonès. Una trajectòria marcada per l'experiència internacional, el rigor acadèmic i la passió per la comunicació intercultural.</p>
+      <p class="perfil-text fade-up" data-ca="Traductora i intèrpret en formació, especialitzada en la combinació lingüística català/castellà ↔ anglès, amb japonès com a quarta llengua de treball. Una trajectòria marcada per l'experiència internacional, el rigor acadèmic i la passió per la comunicació intercultural." data-es="Traductora e intérprete en formación, especializada en la combinación lingüística catalán/castellano ↔ inglés, con el japonés como cuarta lengua de trabajo. Una trayectoria marcada por la experiencia internacional, el rigor académico y la pasión por la comunicación intercultural.">Traductora i intèrpret en formació, especialitzada en la combinació lingüística català/castellà ↔ anglès, amb japonès com a quarta llengua de treball. Una trajectòria marcada per l'experiència internacional, el rigor acadèmic i la passió per la comunicació intercultural.</p>
     </div>
     <ul class="perfil-list fade-up">
       <li data-ca="Graduada en Traducció i Interpretació, UAB (2022–2026)" data-es="Graduada en Traducción e Interpretación, UAB (2022–2026)">Graduada en Traducció i Interpretació, UAB (2022–2026)</li>
-      <li data-ca="Especialitzada en interpretació d'enllaç EN↔CA/ES i traducció literària" data-es="Especializada en interpretación de enlace EN↔CA/ES y traducción literaria">Especialitzada en interpretació d'enllaç EN↔CA/ES i traducció literària</li>
-      <li data-ca="Erasmus+ a Irlanda · Au Pair a Eslovènia · Group Leader a Anglaterra" data-es="Erasmus+ en Irlanda · Au Pair en Eslovenia · Group Leader en Inglaterra">Erasmus+ a Irlanda · Au Pair a Eslovènia · Group Leader a Anglaterra</li>
+      <li data-ca="Especialitzada en interpretació d'enllaç EN↔CA/ES, traducció literària i correcció de textos" data-es="Especializada en interpretación de enlace EN↔CA/ES, traducción literaria y corrección de textos">Especialitzada en interpretació d'enllaç EN↔CA/ES, traducció literària i correcció de textos</li>
+      <li data-ca="Japonès B2 · Erasmus+ a Irlanda · Au Pair a Eslovènia · Group Leader a Anglaterra" data-es="Japonés B2 · Erasmus+ en Irlanda · Au Pair en Eslovenia · Group Leader en Inglaterra">Japonès B2 · Erasmus+ a Irlanda · Au Pair a Eslovènia · Group Leader a Anglaterra</li>
       <li data-ca="Pràctiques d'intèrpret en torneigs internacionals · Komm Mit, 2026" data-es="Prácticas de intérprete en torneos internacionales · Komm Mit, 2026">Pràctiques d'intèrpret en torneigs internacionals · Komm Mit, 2026</li>
       <li data-ca="Perfil multicultural, polivalent i exigent amb la qualitat" data-es="Perfil multicultural, polivalente y exigente con la calidad">Perfil multicultural, polivalent i exigent amb la qualitat</li>
     </ul>
@@ -590,8 +699,8 @@
       <p class="servei-combo">EN ↔ CA / ES</p>
       <p class="servei-nom" data-ca="Interpretació d'enllaç" data-es="Interpretación de enlace">Interpretació d'enllaç</p>
       <div class="servei-preus">
-        <div class="preu-item"><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">45 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
-        <div class="preu-item"><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">35 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">45 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">35 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
       </div>
     </div>
 
@@ -599,8 +708,8 @@
       <p class="servei-combo">EN ↔ CA / ES</p>
       <p class="servei-nom" data-ca="Interpretació presencial (mitja jornada)" data-es="Interpretación presencial (media jornada)">Interpretació presencial (mitja jornada)</p>
       <div class="servei-preus">
-        <div class="preu-item"><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">160 €<small style="font-size:0.65rem;font-family:var(--font-body)">/4h</small></p></div>
-        <div class="preu-item"><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">120 €<small style="font-size:0.65rem;font-family:var(--font-body)">/4h</small></p></div>
+        <div><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">160 €<small style="font-size:0.65rem;font-family:var(--font-body)">/4h</small></p></div>
+        <div><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">120 €<small style="font-size:0.65rem;font-family:var(--font-body)">/4h</small></p></div>
       </div>
     </div>
 
@@ -608,8 +717,8 @@
       <p class="servei-combo">EN ↔ CA / ES</p>
       <p class="servei-nom" data-ca="Interpretació presencial (jornada completa)" data-es="Interpretación presencial (jornada completa)">Interpretació presencial (jornada completa)</p>
       <div class="servei-preus">
-        <div class="preu-item"><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">300 €<small style="font-size:0.65rem;font-family:var(--font-body)">/8h</small></p></div>
-        <div class="preu-item"><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">240 €<small style="font-size:0.65rem;font-family:var(--font-body)">/8h</small></p></div>
+        <div><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">300 €<small style="font-size:0.65rem;font-family:var(--font-body)">/8h</small></p></div>
+        <div><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">240 €<small style="font-size:0.65rem;font-family:var(--font-body)">/8h</small></p></div>
       </div>
     </div>
 
@@ -617,8 +726,8 @@
       <p class="servei-combo">EN ↔ CA / ES</p>
       <p class="servei-nom" data-ca="Interpretació telefònica / videotrucada" data-es="Interpretación telefónica / videollamada">Interpretació telefònica / videotrucada</p>
       <div class="servei-preus">
-        <div class="preu-item"><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">40 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
-        <div class="preu-item"><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">30 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">40 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">30 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
       </div>
     </div>
 
@@ -626,8 +735,8 @@
       <p class="servei-combo">EN ↔ CA / ES</p>
       <p class="servei-nom" data-ca="Acompanyament lingüístic" data-es="Acompañamiento lingüístico">Acompanyament lingüístic</p>
       <div class="servei-preus">
-        <div class="preu-item"><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">50 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
-        <div class="preu-item"><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">40 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">50 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">40 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
       </div>
     </div>
 
@@ -635,8 +744,8 @@
       <p class="servei-combo">EN ↔ CA / ES</p>
       <p class="servei-nom" data-ca="Mediació intercultural" data-es="Mediación intercultural">Mediació intercultural</p>
       <div class="servei-preus">
-        <div class="preu-item"><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">55 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
-        <div class="preu-item"><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">45 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">55 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">45 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
       </div>
     </div>
 
@@ -644,8 +753,8 @@
       <p class="servei-combo">EN ↔ CA / ES</p>
       <p class="servei-nom" data-ca="Preparació prèvia (documentació i glossaris)" data-es="Preparación previa (documentación y glosarios)">Preparació prèvia (documentació i glossaris)</p>
       <div class="servei-preus">
-        <div class="preu-item"><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">25 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
-        <div class="preu-item"><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">20 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Client directe" data-es="Cliente directo">Client directe</p><p class="preu-value accent">25 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
+        <div><p class="preu-label" data-ca="Agència" data-es="Agencia">Agència</p><p class="preu-value">20 €<small style="font-size:0.65rem;font-family:var(--font-body)">/h</small></p></div>
       </div>
     </div>
 
@@ -725,19 +834,19 @@
       <div class="mostra-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleMostra(this)">
         <div>
           <p class="mostra-num" data-ca="Mostra 01" data-es="Muestra 01">Mostra 01</p>
-          <p class="mostra-title" data-ca="Interpretació entre equips internacionals" data-es="Interpretación entre equipos internacionales">Interpretació entre equips internacionals</p>
+          <p class="mostra-title" data-ca="Interpretació entre equips internacionals i personal de l'organització" data-es="Interpretación entre equipos internacionales y personal de la organización">Interpretació entre equips internacionals i personal de l'organització</p>
         </div>
         <span class="mostra-arrow" aria-hidden="true">›</span>
       </div>
       <div class="mostra-body">
         <div class="mostra-content">
-          <p data-ca="Durant les pràctiques a Komm Mit, vaig actuar com a intèrpret en un torneig internacional de futbol, facilitant la comunicació entre els equips participants i el personal local encarregat de l'organització dels partits." data-es="Durante las prácticas en Komm Mit, actué como intérprete en un torneo internacional de fútbol, facilitando la comunicación entre los equipos participantes y el personal local encargado de la organización de los partidos.">Durant les pràctiques a Komm Mit, vaig actuar com a intèrpret en un torneig internacional de futbol, facilitant la comunicació entre els equips participants i el personal local encarregat de l'organització dels partits.</p>
-          <p data-ca="La llengua vehicular era l'anglès, però el nivell lingüístic dels participants era molt divers: des de parlants nadius fins a interlocutors amb competència limitada. Calia adaptar-se constantment a accents, velocitats i registres molt diferents." data-es="La lengua vehicular era el inglés, pero el nivel lingüístico de los participantes era muy diverso: desde hablantes nativos hasta interlocutores con competencia limitada. Era necesario adaptarse constantemente a acentos, velocidades y registros muy diferentes.">La llengua vehicular era l'anglès, però el nivell lingüístic dels participants era molt divers: des de parlants nadius fins a interlocutors amb competència limitada. Calia adaptar-se constantment a accents, velocitats i registres molt diferents.</p>
-          <p data-ca="Estratègia adoptada: reformulació del missatge en un llenguatge més accessible, verificació de comprensió i gestió activa de malentesos." data-es="Estrategia adoptada: reformulación del mensaje en un lenguaje más accesible, verificación de comprensión y gestión activa de malentendidos.">Estratègia adoptada: reformulació del missatge en un llenguatge més accessible, verificació de comprensió i gestió activa de malentesos.</p>
+          <p data-ca="Una de les meves principals funcions durant les pràctiques va consistir a actuar com a intèrpret durant un torneig internacional de futbol organitzat per l'empresa Komm Mit. La meva tasca principal era facilitar la comunicació entre els equips participants i el personal local encarregat de l'organització dels partits." data-es="Una de mis principales funciones durante las prácticas consistió en actuar como intérprete durante un torneo internacional de fútbol organizado por la empresa Komm Mit. Mi tarea principal era facilitar la comunicación entre los equipos participantes y el personal local encargado de la organización de los partidos.">Una de les meves principals funcions durant les pràctiques va consistir a actuar com a intèrpret durant un torneig internacional de futbol organitzat per l'empresa Komm Mit. La meva tasca principal era facilitar la comunicació entre els equips participants i el personal local encarregat de l'organització dels partits.</p>
+          <p data-ca="Els equips procedien de diferents països i, tot i que la llengua vehicular era l'anglès, el nivell lingüístic dels participants era molt divers. Alguns entrenadors i jugadors eren parlants nadius d'anglès, mentre que d'altres utilitzaven aquesta llengua com a idioma de comunicació internacional. Aquesta situació exigia una gran capacitat d'adaptació a accents molt diferents, velocitats de parla diverses i nivells desiguals de competència lingüística." data-es="Los equipos procedían de diferentes países y, aunque la lengua vehicular era el inglés, el nivel lingüístico de los participantes era muy diverso. Algunos entrenadores y jugadores eran hablantes nativos de inglés, mientras que otros utilizaban esta lengua como idioma de comunicación internacional. Esta situación exigía una gran capacidad de adaptación a acentos muy diferentes, velocidades de habla diversas y niveles desiguales de competencia lingüística.">Els equips procedien de diferents països i, tot i que la llengua vehicular era l'anglès, el nivell lingüístic dels participants era molt divers. Alguns entrenadors i jugadors eren parlants nadius d'anglès, mentre que d'altres utilitzaven aquesta llengua com a idioma de comunicació internacional. Aquesta situació exigia una gran capacitat d'adaptació a accents molt diferents, velocitats de parla diverses i nivells desiguals de competència lingüística.</p>
+          <p data-ca="Per superar aquestes dificultats, vaig adoptar diferents estratègies. Quan era necessari, demanava aclariments per assegurar una comprensió correcta del missatge, reformulava algunes explicacions amb un llenguatge més accessible i verificava que totes les parts haguessin entès correctament la informació transmesa. Aquesta experiència em va permetre desenvolupar la meva capacitat d'escolta activa, flexibilitat lingüística i adaptació intercultural." data-es="Para superar estas dificultades, adopté diferentes estrategias. Cuando era necesario, pedía aclaraciones para asegurar una comprensión correcta del mensaje, reformulaba algunas explicaciones con un lenguaje más accesible y verificaba que todas las partes hubieran entendido correctamente la información transmitida. Esta experiencia me permitió desarrollar mi capacidad de escucha activa, flexibilidad lingüística y adaptación intercultural.">Per superar aquestes dificultats, vaig adoptar diferents estratègies. Quan era necessari, demanava aclariments per assegurar una comprensió correcta del missatge, reformulava algunes explicacions amb un llenguatge més accessible i verificava que totes les parts haguessin entès correctament la informació transmesa. Aquesta experiència em va permetre desenvolupar la meva capacitat d'escolta activa, flexibilitat lingüística i adaptació intercultural.</p>
           <div class="mostra-competencies">
-            <span class="comp-tag" data-ca="Escolta activa" data-es="Escucha activa">Escolta activa</span>
-            <span class="comp-tag" data-ca="Flexibilitat lingüística" data-es="Flexibilidad lingüística">Flexibilitat lingüística</span>
-            <span class="comp-tag" data-ca="Adaptació intercultural" data-es="Adaptación intercultural">Adaptació intercultural</span>
+            <span class="comp-tag">Escolta activa</span>
+            <span class="comp-tag">Flexibilitat lingüística</span>
+            <span class="comp-tag">Adaptació intercultural</span>
           </div>
         </div>
       </div>
@@ -747,18 +856,20 @@
       <div class="mostra-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleMostra(this)">
         <div>
           <p class="mostra-num" data-ca="Mostra 02" data-es="Muestra 02">Mostra 02</p>
-          <p class="mostra-title" data-ca="Mediació entre personal local i Komm Mit" data-es="Mediación entre personal local y Komm Mit">Mediació entre personal local i Komm Mit</p>
+          <p class="mostra-title" data-ca="Mediació entre el personal local i el personal de Komm Mit" data-es="Mediación entre el personal local y el personal de Komm Mit">Mediació entre el personal local i el personal de Komm Mit</p>
         </div>
         <span class="mostra-arrow" aria-hidden="true">›</span>
       </div>
       <div class="mostra-body">
         <div class="mostra-content">
-          <p data-ca="Vaig interpretar entre el personal local dels camps de futbol (àrbitres, responsables d'instal·lacions) i els representants de Komm Mit, majoritàriament d'origen alemany amb coneixements limitats de castellà." data-es="Interpreté entre el personal local de los campos de fútbol (árbitros, responsables de instalaciones) y los representantes de Komm Mit, mayoritariamente de origen alemán con conocimientos limitados de castellano.">Vaig interpretar entre el personal local dels camps de futbol (àrbitres, responsables d'instal·lacions) i els representants de Komm Mit, majoritàriament d'origen alemany amb coneixements limitats de castellà.</p>
-          <p data-ca="La interpretació anava més enllà de la traducció literal: calia garantir que la informació s'intercanviés de manera clara i eficaç en qüestions logístiques, incidències i modificacions d'horaris." data-es="La interpretación iba más allá de la traducción literal: era necesario garantizar que la información se intercambiara de manera clara y eficaz en cuestiones logísticas, incidencias y modificaciones de horarios.">La interpretació anava més enllà de la traducció literal: calia garantir que la informació s'intercanviés de manera clara i eficaç en qüestions logístiques, incidències i modificacions d'horaris.</p>
+          <p data-ca="Una altra tasca habitual consistia a interpretar entre el personal local dels camps de futbol (àrbitres, responsables de les instal·lacions i treballadors dels camps) i els representants de l'empresa Komm Mit, majoritàriament d'origen alemany i amb coneixements limitats de castellà." data-es="Otra tarea habitual consistía en interpretar entre el personal local de los campos de fútbol (árbitros, responsables de las instalaciones y trabajadores de los campos) y los representantes de la empresa Komm Mit, mayoritariamente de origen alemán y con conocimientos limitados de castellano.">Una altra tasca habitual consistia a interpretar entre el personal local dels camps de futbol (àrbitres, responsables de les instal·lacions i treballadors dels camps) i els representants de l'empresa Komm Mit, majoritàriament d'origen alemany i amb coneixements limitats de castellà.</p>
+          <p data-ca="En aquest context, la interpretació no es limitava a una simple traducció lingüística, sinó que sovint requeria una funció de mediació per garantir que la informació s'intercanviés de manera clara i eficaç. Les converses podien tractar qüestions logístiques, incidències durant els partits, modificacions d'horaris o necessitats específiques dels equips." data-es="En este contexto, la interpretación no se limitaba a una simple traducción lingüística, sino que a menudo requería una función de mediación para garantizar que la información se intercambiara de manera clara y eficaz. Las conversaciones podían tratar cuestiones logísticas, incidencias durante los partidos, modificaciones de horarios o necesidades específicas de los equipos.">En aquest context, la interpretació no es limitava a una simple traducció lingüística, sinó que sovint requeria una funció de mediació per garantir que la informació s'intercanviés de manera clara i eficaç. Les converses podien tractar qüestions logístiques, incidències durant els partits, modificacions d'horaris o necessitats específiques dels equips.</p>
+          <p data-ca="La principal dificultat consistia a transmetre la informació amb precisió i rapidesa en situacions on les decisions s'havien de prendre de manera immediata. Per afrontar-ho, procurava mantenir un discurs clar i estructurat, prioritzant la fidelitat del missatge i evitant interpretacions personals que poguessin alterar la informació original. Aquesta experiència va reforçar les meves competències en interpretació consecutiva, gestió de la informació i resolució de problemes en entorns dinàmics." data-es="La principal dificultad consistía en transmitir la información con precisión y rapidez en situaciones donde las decisiones debían tomarse de manera inmediata. Para afrontarlo, procuraba mantener un discurso claro y estructurado, priorizando la fidelidad del mensaje y evitando interpretaciones personales que pudieran alterar la información original. Esta experiencia reforzó mis competencias en interpretación consecutiva, gestión de la información y resolución de problemas en entornos dinámicos.">La principal dificultat consistia a transmetre la informació amb precisió i rapidesa en situacions on les decisions s'havien de prendre de manera immediata. Per afrontar-ho, procurava mantenir un discurs clar i estructurat, prioritzant la fidelitat del missatge i evitant interpretacions personals que poguessin alterar la informació original. Aquesta experiència va reforçar les meves competències en interpretació consecutiva, gestió de la informació i resolució de problemes en entorns dinàmics.</p>
           <div class="mostra-competencies">
-            <span class="comp-tag" data-ca="Interpretació consecutiva" data-es="Interpretación consecutiva">Interpretació consecutiva</span>
-            <span class="comp-tag" data-ca="Gestió de la informació" data-es="Gestión de la información">Gestió de la informació</span>
-            <span class="comp-tag" data-ca="Precisió i fidelitat" data-es="Precisión y fidelidad">Precisió i fidelitat</span>
+            <span class="comp-tag">Interpretació consecutiva</span>
+            <span class="comp-tag">Gestió de la informació</span>
+            <span class="comp-tag">Resolució de problemes</span>
+            <span class="comp-tag">Precisió i fidelitat</span>
           </div>
         </div>
       </div>
@@ -774,12 +885,15 @@
       </div>
       <div class="mostra-body">
         <div class="mostra-content">
-          <p data-ca="Durant el torneig, vaig intervenir en situacions on entrenadors o responsables d'equip presentaven queixes relacionades amb l'organització o decisions esportives. Actuava com a intermediària entre les parts implicades." data-es="Durante el torneo, intervine en situaciones donde entrenadores o responsables de equipo presentaban quejas relacionadas con la organización o decisiones deportivas. Actuaba como intermediaria entre las partes implicadas.">Durant el torneig, vaig intervenir en situacions on entrenadors o responsables d'equip presentaven queixes relacionades amb l'organització o decisions esportives. Actuava com a intermediària entre les parts implicades.</p>
-          <p data-ca="L'entorn esportiu genera emocions intenses. Vaig aprendre a mantenir la calma, escoltar activament totes les parts i transmetre els missatges de manera objectiva. El control del llenguatge no verbal i el to de veu resultaren clau per reduir la tensió." data-es="El entorno deportivo genera emociones intensas. Aprendí a mantener la calma, escuchar activamente a todas las partes y transmitir los mensajes de manera objetiva. El control del lenguaje no verbal y el tono de voz resultaron clave para reducir la tensión.">L'entorn esportiu genera emocions intenses. Vaig aprendre a mantenir la calma, escoltar activament totes les parts i transmetre els missatges de manera objectiva. El control del llenguatge no verbal i el to de veu resultaren clau per reduir la tensió.</p>
+          <p data-ca="Durant el torneig també vaig intervenir en situacions en què entrenadors, jugadors o responsables d'equip presentaven queixes relacionades amb l'organització o amb decisions esportives. En aquests casos, actuava com a intermediària entre les diferents parts implicades, especialment entre els responsables dels camps i els equips participants." data-es="Durante el torneo también intervine en situaciones en que entrenadores, jugadores o responsables de equipo presentaban quejas relacionadas con la organización o con decisiones deportivas. En estos casos, actuaba como intermediaria entre las diferentes partes implicadas, especialmente entre los responsables de los campos y los equipos participantes.">Durant el torneig també vaig intervenir en situacions en què entrenadors, jugadors o responsables d'equip presentaven queixes relacionades amb l'organització o amb decisions esportives. En aquests casos, actuava com a intermediària entre les diferents parts implicades, especialment entre els responsables dels camps i els equips participants.</p>
+          <p data-ca="L'entorn esportiu genera sovint emocions intenses i situacions de tensió, especialment quan els participants consideren que s'ha produït una injustícia o un error organitzatiu. En alguns moments vaig haver de gestionar converses amb persones enfadades o frustrades, mantenint sempre una actitud professional i neutral." data-es="El entorno deportivo genera a menudo emociones intensas y situaciones de tensión, especialmente cuando los participantes consideran que se ha producido una injusticia o un error organizativo. En algunos momentos tuve que gestionar conversaciones con personas enfadadas o frustradas, manteniendo siempre una actitud profesional y neutral.">L'entorn esportiu genera sovint emocions intenses i situacions de tensió, especialment quan els participants consideren que s'ha produït una injustícia o un error organitzatiu. En alguns moments vaig haver de gestionar converses amb persones enfadades o frustrades, mantenint sempre una actitud professional i neutral.</p>
+          <p data-ca="La principal dificultat era evitar que les emocions afectessin la qualitat de la interpretació. Per això vaig procurar mantenir la calma, escoltar activament totes les parts i transmetre els missatges de manera objectiva i respectuosa. També vaig aprendre la importància de controlar el llenguatge no verbal i el to de veu per contribuir a reduir la tensió de les converses. Aquesta experiència em va permetre desenvolupar competències relacionades amb la resistència a l'estrès, la gestió de conflictes, la comunicació interpersonal i la presa de decisions sota pressió." data-es="La principal dificultad era evitar que las emociones afectaran la calidad de la interpretación. Por eso procuré mantener la calma, escuchar activamente a todas las partes y transmitir los mensajes de manera objetiva y respetuosa. También aprendí la importancia de controlar el lenguaje no verbal y el tono de voz para contribuir a reducir la tensión de las conversaciones. Esta experiencia me permitió desarrollar competencias relacionadas con la resistencia al estrés, la gestión de conflictos, la comunicación interpersonal y la toma de decisiones bajo presión.">La principal dificultat era evitar que les emocions afectessin la qualitat de la interpretació. Per això vaig procurar mantenir la calma, escoltar activament totes les parts i transmetre els missatges de manera objectiva i respectuosa. També vaig aprendre la importància de controlar el llenguatge no verbal i el to de veu per contribuir a reduir la tensió de les converses. Aquesta experiència em va permetre desenvolupar competències relacionades amb la resistència a l'estrès, la gestió de conflictes, la comunicació interpersonal i la presa de decisions sota pressió.</p>
           <div class="mostra-competencies">
-            <span class="comp-tag" data-ca="Resistència a l'estrès" data-es="Resistencia al estrés">Resistència a l'estrès</span>
-            <span class="comp-tag" data-ca="Comunicació interpersonal" data-es="Comunicación interpersonal">Comunicació interpersonal</span>
-            <span class="comp-tag" data-ca="Neutralitat professional" data-es="Neutralidad profesional">Neutralitat professional</span>
+            <span class="comp-tag">Resistència a l'estrès</span>
+            <span class="comp-tag">Gestió de conflictes</span>
+            <span class="comp-tag">Comunicació interpersonal</span>
+            <span class="comp-tag">Presa de decisions</span>
+            <span class="comp-tag">Neutralitat professional</span>
           </div>
         </div>
       </div>
@@ -795,12 +909,14 @@
       </div>
       <div class="mostra-body">
         <div class="mostra-content">
-          <p data-ca="Tot i que les pràctiques estaven plantejades principalment en anglès, en diverses ocasions vaig haver d'utilitzar el francès per comunicar-me amb alguns participants del torneig." data-es="Aunque las prácticas estaban planteadas principalmente en inglés, en varias ocasiones tuve que usar el francés para comunicarme con algunos participantes del torneo.">Tot i que les pràctiques estaven plantejades principalment en anglès, en diverses ocasions vaig haver d'utilitzar el francès per comunicar-me amb alguns participants del torneig.</p>
-          <p data-ca="Aquestes situacions van posar a prova la meva capacitat d'adaptació lingüística ràpida i el canvi de codi entre idiomes. El fet de disposar d'una llengua addicional va contribuir a facilitar la comunicació i a millorar l'experiència dels participants." data-es="Estas situaciones pusieron a prueba mi capacidad de adaptación lingüística rápida y el cambio de código entre idiomas. El hecho de disponer de una lengua adicional contribuyó a facilitar la comunicación y a mejorar la experiencia de los participantes.">Aquestes situacions van posar a prova la meva capacitat d'adaptació lingüística ràpida i el canvi de codi entre idiomes. El fet de disposar d'una llengua addicional va contribuir a facilitar la comunicació i a millorar l'experiència dels participants.</p>
+          <p data-ca="Tot i que inicialment les pràctiques estaven plantejades per desenvolupar-se principalment en anglès, en diverses ocasions vaig haver d'utilitzar el francès per comunicar-me amb alguns participants del torneig." data-es="Aunque inicialmente las prácticas estaban planteadas para desarrollarse principalmente en inglés, en varias ocasiones tuve que utilizar el francés para comunicarme con algunos participantes del torneo.">Tot i que inicialment les pràctiques estaven plantejades per desenvolupar-se principalment en anglès, en diverses ocasions vaig haver d'utilitzar el francès per comunicar-me amb alguns participants del torneig.</p>
+          <p data-ca="Aquestes situacions van posar a prova la meva capacitat d'adaptació lingüística, ja que era necessari canviar ràpidament d'una llengua a una altra segons les necessitats dels interlocutors. El fet de poder utilitzar una llengua addicional va contribuir a facilitar la comunicació i a millorar l'experiència dels participants." data-es="Estas situaciones pusieron a prueba mi capacidad de adaptación lingüística, ya que era necesario cambiar rápidamente de una lengua a otra según las necesidades de los interlocutores. El hecho de poder utilizar una lengua adicional contribuyó a facilitar la comunicación y a mejorar la experiencia de los participantes.">Aquestes situacions van posar a prova la meva capacitat d'adaptació lingüística, ja que era necessari canviar ràpidament d'una llengua a una altra segons les necessitats dels interlocutors. El fet de poder utilitzar una llengua addicional va contribuir a facilitar la comunicació i a millorar l'experiència dels participants.</p>
+          <p data-ca="Aquesta experiència va demostrar la importància de la flexibilitat lingüística en contextos internacionals i va reforçar la meva confiança a l'hora de treballar en entorns multilingües." data-es="Esta experiencia demostró la importancia de la flexibilidad lingüística en contextos internacionales y reforzó mi confianza a la hora de trabajar en entornos multilingües.">Aquesta experiència va demostrar la importància de la flexibilitat lingüística en contextos internacionals i va reforçar la meva confiança a l'hora de treballar en entorns multilingües.</p>
           <div class="mostra-competencies">
-            <span class="comp-tag" data-ca="Canvi de codi lingüístic" data-es="Cambio de código lingüístico">Canvi de codi lingüístic</span>
-            <span class="comp-tag" data-ca="Multilingüisme" data-es="Multilingüismo">Multilingüisme</span>
-            <span class="comp-tag" data-ca="Confiança lingüística" data-es="Confianza lingüística">Confiança lingüística</span>
+            <span class="comp-tag">Canvi de codi lingüístic</span>
+            <span class="comp-tag">Multilingüisme</span>
+            <span class="comp-tag">Flexibilitat lingüística</span>
+            <span class="comp-tag">Confiança lingüística</span>
           </div>
         </div>
       </div>
@@ -811,239 +927,4 @@
 
 <!-- FORMACIÓ -->
 <section id="formacio" aria-labelledby="formacio-title">
-  <div class="section-label" aria-hidden="true" data-ca="Estudis" data-es="Estudios">Estudis</div>
-  <h2 class="section-title" id="formacio-title"><em data-ca="Formació" data-es="Formación">Formació</em><br><span data-ca="i eines" data-es="y herramientas">i eines</span></h2>
-  <div class="formacio-grid fade-up">
-
-    <div>
-      <p class="formacio-bloc-title" data-ca="Formació acadèmica" data-es="Formación académica">Formació acadèmica</p>
-      <div class="formacio-entry">
-        <p class="formacio-year">2022–2026</p>
-        <p class="formacio-name" data-ca="Grau en Traducció i Interpretació" data-es="Grado en Traducción e Interpretación">Grau en Traducció i Interpretació</p>
-        <p class="formacio-inst">Universitat Autònoma de Barcelona</p>
-      </div>
-      <div class="formacio-entry">
-        <p class="formacio-year">2020–2022</p>
-        <p class="formacio-name" data-ca="Batxillerat social — Matrícula d'honor" data-es="Bachillerato social — Matrícula de honor">Batxillerat social — Matrícula d'honor</p>
-        <p class="formacio-inst">Institut Almatà</p>
-      </div>
-      <div class="formacio-entry">
-        <p class="formacio-year">2016–2020</p>
-        <p class="formacio-name" data-ca="Educació Secundària Obligatòria" data-es="Educación Secundaria Obligatoria">Educació Secundària Obligatòria</p>
-        <p class="formacio-inst">Institut Almatà</p>
-      </div>
-    </div>
-
-    <div>
-      <p class="formacio-bloc-title" data-ca="Formació complementària" data-es="Formación complementaria">Formació complementària</p>
-      <div class="formacio-entry">
-        <p class="formacio-year">2026</p>
-        <p class="formacio-name" data-ca="Congrés d'Ètica i Bioètica Interdisciplinar" data-es="Congreso de Ética y Bioética Interdisciplinar">Congrés d'Ètica i Bioètica Interdisciplinar</p>
-      </div>
-      <div class="formacio-entry">
-        <p class="formacio-year">2024</p>
-        <p class="formacio-name" data-ca="Seminari sobre la Traducció a Catalunya" data-es="Seminario sobre la Traducción en Cataluña">Seminari sobre la Traducció a Catalunya</p>
-        <p class="formacio-inst" data-ca="Associació d'Escriptors en Llengua Catalana (AELC)" data-es="Asociación de Escritores en Lengua Catalana (AELC)">Associació d'Escriptors en Llengua Catalana (AELC)</p>
-      </div>
-    </div>
-
-    <div>
-      <p class="formacio-bloc-title" data-ca="Eines de traducció" data-es="Herramientas de traducción">Eines de traducció</p>
-      <div class="eines">
-        <div class="eina">SDL Trados Studio</div>
-        <div class="eina">OmegaT</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FACTURA -->
-<section id="factura" aria-labelledby="factura-title">
-  <div class="section-label" aria-hidden="true" data-ca="Documents" data-es="Documentos">Documents</div>
-  <h2 class="section-title" id="factura-title"><em data-ca="Factura" data-es="Factura">Factura</em><br><span data-ca="de mostra" data-es="de muestra">de mostra</span></h2>
-  <p style="font-size:0.82rem;color:var(--ink-muted);margin-bottom:2rem;max-width:500px" data-ca="A continuació es mostra una factura de mostra dels serveis prestats durant les pràctiques professionals. Podeu sol·licitar una factura adaptada a les vostres necessitats." data-es="A continuación se muestra una factura de muestra de los servicios prestados durante las prácticas profesionales. Podéis solicitar una factura adaptada a vuestras necesidades.">A continuació es mostra una factura de mostra dels serveis prestats durant les pràctiques professionals. Podeu sol·licitar una factura adaptada a les vostres necessitats.</p>
-  <div class="factura-wrap fade-up">
-    <div class="factura-doc" id="factura-print">
-      <div class="factura-header">
-        <div class="factura-from">
-          <strong>Maria del Mar Vega Díaz</strong>
-          C/ Diagonal, 48, Cerdanyola del Vallès, 08290<br>
-          mariadelmar@vegadiaz.com · (+34) 644 610 543<br>
-          NIF: 12345678A
-        </div>
-        <div style="text-align:right">
-          <div class="factura-num">
-            <small data-ca="Factura núm." data-es="Factura núm.">Factura núm.</small>
-            001/2026
-          </div>
-          <p style="font-size:0.75rem;color:var(--ink-muted);margin-top:0.25rem">03/06/2026</p>
-        </div>
-      </div>
-      <div class="factura-parties">
-        <div>
-          <p class="factura-party-label" data-ca="Client" data-es="Cliente">Client</p>
-          <div class="factura-party-info">
-            <strong>Global Connect Services S.L.</strong>
-            Carrer Negocis 45, Barcelona<br>
-            NIF: B98765432
-          </div>
-        </div>
-        <div>
-          <p class="factura-party-label" data-ca="Concepte" data-es="Concepto">Concepte</p>
-          <div class="factura-party-info" data-ca="Servei d'interpretació d'enllaç anglès–català/castellà durant reunió comercial internacional." data-es="Servicio de interpretación de enlace inglés–catalán/castellano durante reunión comercial internacional.">Servei d'interpretació d'enllaç anglès–català/castellà durant reunió comercial internacional.</div>
-        </div>
-      </div>
-      <table class="factura-table">
-        <thead>
-          <tr>
-            <th data-ca="Servei" data-es="Servicio">Servei</th>
-            <th data-ca="Unitats" data-es="Unidades">Unitats</th>
-            <th data-ca="Preu unit." data-es="Precio unit.">Preu unit.</th>
-            <th data-ca="Subtotal" data-es="Subtotal">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-ca="Interpretació d'enllaç (EN–CA/ES)" data-es="Interpretación de enlace (EN–CA/ES)">Interpretació d'enllaç (EN–CA/ES)</td>
-            <td>4 h</td><td>45,00 €</td><td>180,00 €</td>
-          </tr>
-          <tr>
-            <td data-ca="Preparació prèvia (glossari i documentació)" data-es="Preparación previa (glosario y documentación)">Preparació prèvia (glossari i documentació)</td>
-            <td>2 h</td><td>25,00 €</td><td>50,00 €</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="factura-totals">
-        <div></div>
-        <div class="factura-totals-right">
-          <div class="factura-total-row"><span data-ca="Subtotal" data-es="Subtotal">Subtotal</span><span>230,00 €</span></div>
-          <div class="factura-total-row"><span>IVA (21%)</span><span>48,30 €</span></div>
-          <div class="factura-total-row"><span>IRPF (−15%)</span><span>−34,50 €</span></div>
-          <div class="factura-total-row final"><span data-ca="Total a pagar" data-es="Total a pagar">Total a pagar</span><span class="amount">243,80 €</span></div>
-        </div>
-      </div>
-    </div>
-    <button class="btn-primary" onclick="window.print()" data-ca="Descarregar / Imprimir factura" data-es="Descargar / Imprimir factura">Descarregar / Imprimir factura</button>
-  </div>
-</section>
-
-<!-- CONTACTE -->
-<section id="contacte" aria-labelledby="contacte-title">
-  <div class="section-label">Contacte</div>
-  <h2 class="section-title" id="contacte-title"><em data-ca="Parlem" data-es="Hablemos">Parlem</em></h2>
-  <div class="contacte-grid">
-    <div class="contacte-info fade-up">
-      <div class="contacte-item">
-        <span class="contacte-label" data-ca="Telèfon" data-es="Teléfono">Telèfon</span>
-        <span class="contacte-value"><a href="tel:+34644610543">(+34) 644 610 543</a></span>
-      </div>
-      <div class="contacte-item">
-        <span class="contacte-label" data-ca="Correu electrònic" data-es="Correo electrónico">Correu electrònic</span>
-        <span class="contacte-value"><a href="mailto:mariadelmar@vegadiaz.com">mariadelmar@vegadiaz.com</a></span>
-      </div>
-      <div class="contacte-item">
-        <span class="contacte-label" data-ca="Ubicació" data-es="Ubicación">Ubicació</span>
-        <span class="contacte-value">Cerdanyola del Vallès, Barcelona</span>
-      </div>
-      <div class="social-links">
-        <a href="https://linkedin.com" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
-        <a href="mailto:mariadelmar@vegadiaz.com" class="social-link" aria-label="Correu electrònic">@</a>
-      </div>
-    </div>
-    <div class="fade-up">
-      <div class="form-group">
-        <label class="form-label" for="nom" data-ca="Nom i cognoms" data-es="Nombre y apellidos">Nom i cognoms</label>
-        <input class="form-input" type="text" id="nom" name="nom" placeholder="Anna García" autocomplete="name">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="email" data-ca="Correu electrònic" data-es="Correo electrónico">Correu electrònic</label>
-        <input class="form-input" type="email" id="email" name="email" placeholder="anna@empresa.com" autocomplete="email">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="missatge" data-ca="Missatge" data-es="Mensaje">Missatge</label>
-        <textarea class="form-textarea" id="missatge" name="missatge" placeholder="Descriu el teu projecte o consulta..."></textarea>
-      </div>
-      <button class="btn-send" type="button" onclick="handleForm()" data-ca="Enviar missatge" data-es="Enviar mensaje">Enviar missatge</button>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span>© 2026 Maria del Mar Vega Díaz</span>
-  <span data-ca="Traductora i Intèrpret · Cerdanyola del Vallès" data-es="Traductora e Intérprete · Cerdanyola del Vallès">Traductora i Intèrpret · Cerdanyola del Vallès</span>
-</footer>
-
-<script>
-  // LANG TOGGLE
-  let lang = 'ca';
-  const btn = document.getElementById('lang-btn');
-  btn.addEventListener('click', () => {
-    lang = lang === 'ca' ? 'es' : 'ca';
-    btn.textContent = lang === 'ca' ? 'ES' : 'CA';
-    document.querySelectorAll('[data-ca]').forEach(el => {
-      el.textContent = el.getAttribute('data-' + lang);
-    });
-    document.querySelector('html').setAttribute('lang', lang === 'ca' ? 'ca' : 'es');
-  });
-
-  // HAMBURGER
-  const ham = document.getElementById('hamburger');
-  const menu = document.getElementById('nav-menu');
-  ham.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    ham.setAttribute('aria-expanded', open);
-  });
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
-
-  // ACCORDION
-  function toggleMostra(header) {
-    const item = header.closest('.mostra-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.mostra-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.mostra-header').setAttribute('aria-expanded', 'false');
-    });
-    if (!isOpen) {
-      item.classList.add('open');
-      header.setAttribute('aria-expanded', 'true');
-    }
-  }
-  document.querySelectorAll('.mostra-header').forEach(h => {
-    h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMostra(h); } });
-  });
-
-  // SCROLL ANIMATIONS
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        entry.target.style.transitionDelay = (entry.target.dataset.delay || 0) + 'ms';
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach((el, i) => {
-    observer.observe(el);
-  });
-
-  // FORM
-  function handleForm() {
-    const nom = document.getElementById('nom').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const missatge = document.getElementById('missatge').value.trim();
-    const btn = document.querySelector('.btn-send');
-    if (!nom || !email || !missatge) {
-      btn.textContent = lang === 'ca' ? 'Omple tots els camps' : 'Rellena todos los campos';
-      btn.style.background = '#888';
-      setTimeout(() => { btn.textContent = lang === 'ca' ? 'Enviar missatge' : 'Enviar mensaje'; btn.style.background = ''; }, 2000);
-      return;
-    }
-    btn.textContent = lang === 'ca' ? 'Missatge enviat ✓' : 'Mensaje enviado ✓';
-    btn.style.background = '#2a7a4a';
-    setTimeout(() => { btn.textContent = lang === 'ca' ? 'Enviar missatge' : 'Enviar mensaje'; btn.style.background = ''; document.getElementById('nom').value=''; document.getElementById('email').value=''; document.getElementById('missatge').value=''; }, 3000);
-  }
-</script>
-</body>
-</html>
+  <div class="section-label" ar
